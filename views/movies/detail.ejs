@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <style>
+        .movie-detail {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        .movie-header {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .movie-poster {
+            flex: 0 0 300px;
+        }
+        .movie-poster img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        .movie-info {
+            flex: 1;
+        }
+        .movie-title {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+        .movie-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            color: #7f8c8d;
+        }
+        .meta-item {
+            background: #f8f9fa;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        .rating-badge {
+            background: #e74c3c;
+            color: white;
+        }
+        .status-badge {
+            background: <%= movie.isFull ? '#e74c3c' : (movie.releaseDate > new Date() ? '#f39c12' : '#27ae60') %>;
+            color: white;
+        }
+        .movie-description {
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        .section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .section h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+        .cast-list, .showtimes-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .cast-item, .showtime-item {
+            background: #ecf0f1;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>Hong Kong Movie System</h1>
+            <div>
+                <% if (user) { %>
+                    <span>Welcome, <%= user.displayName || user.username %></span>
+                    <a href="/admin">Admin</a>
+                    <a href="/auth/logout">Logout</a>
+                <% } else { %>
+                    <a href="/admin/login">Admin Login</a>
+                <% } %>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="movie-detail">
+            <% if (movie) { %>
+                <div class="movie-header">
+                    <div class="movie-poster">
+                        <img src="<%= movie.posterUrl %>" alt="<%= movie.title %>">
+                    </div>
+                    <div class="movie-info">
+                        <h1 class="movie-title"><%= movie.title %></h1>
+
+                        <div class="movie-meta">
+                            <div class="meta-item rating-badge">
+                                Rating: <%= movie.rating %>
+                            </div>
+                            <div class="meta-item status-badge">
+                                <%= movie.isFull ? 'Full' : (movie.releaseDate > new Date() ? 'Coming Soon' : 'Now Showing') %>
+                            </div>
+                            <div class="meta-item">
+                                Duration: <%= movie.duration %> mins
+                            </div>
+                            <div class="meta-item">
+                                Language: <%= movie.language %>
+                            </div>
+                        </div>
+
+                        <div class="movie-description">
+                            <%= movie.description %>
+                        </div>
+
+                        <div class="action-buttons">
+                            <a href="/" class="btn btn-secondary">Back to Home</a>
+                            <% if (user) { %>
+                                <a href="/admin/movies/<%= movie._id %>/edit" class="btn btn-primary">Edit Movie</a>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>Basic Information</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                        <div>
+                            <strong>Director:</strong> <%= movie.director %>
+                        </div>
+                        <div>
+                            <strong>Release Date:</strong>
+                            <% if (movie.releaseDate) { %>
+                                <%= new Date(movie.releaseDate).toLocaleDateString('en-US') %>
+                            <% } else { %>
+                                Not set
+                            <% } %>
+                        </div>
+                        <div>
+                            <strong>Genres:</strong>
+                            <% if (movie.genres && movie.genres.length) { %>
+                                <%= movie.genres.join(', ') %>
+                            <% } else { %>
+                                Not set
+                            <% } %>
+                        </div>
+                        <div>
+                            <strong>Theater Location:</strong> <%= movie.theaterLocation %>
+                        </div>
+                    </div>
+                </div>
+
+                <% if (movie.cast && movie.cast.length > 0) { %>
+                <div class="section">
+                    <h3>Cast</h3>
+                    <div class="cast-list">
+                        <% movie.cast.forEach(actor => { %>
+                            <div class="cast-item"><%= actor %></div>
+                        <% }) %>
+                    </div>
+                </div>
+                <% } %>
+
+                <% if (movie.showTimes && movie.showTimes.length > 0) { %>
+                <div class="section">
+                    <h3>Showtimes</h3>
+                    <div class="showtimes-list">
+                        <% movie.showTimes.forEach(time => { %>
+                            <div class="showtime-item"><%= time %></div>
+                        <% }) %>
+                    </div>
+                </div>
+                <% } %>
+
+            <% } else { %>
+                <div style="text-align: center; padding: 4rem;">
+                    <h2>Movie Not Found</h2>
+                    <p>Sorry, the movie you are looking for does not exist or has been removed.</p>
+                    <a href="/" class="btn btn-primary">Back to Home</a>
+                </div>
+            <% } %>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; Movie System - All rights reserved</p>
+    </footer>
+</body>
+</html>

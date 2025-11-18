@@ -1,0 +1,528 @@
+<%
+const layout = 'layouts/main';
+const fd = (typeof formData !== 'undefined' && formData) ? formData : {};
+%>
+
+<div class="row justify-content-center">
+  <div class="col-lg-10">
+    <div class="card shadow-sm">
+      <div class="card-header bg-success text-white">
+        <div class="d-flex justify-content-between align-items-center">
+          <h4 class="mb-0">
+            <i class="fas fa-plus me-2"></i>Add New Movie
+          </h4>
+            <a href="/admin" class="btn btn-outline-light btn-sm">
+              <i class="fas fa-arrow-left me-1"></i>Back to Admin
+            </a>
+        </div>
+      </div>
+      <div class="card-body">
+        <% if (error) { %>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            <strong>Error:</strong> <%= error %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        <% } %>
+
+        <% if (success) { %>
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i>
+            <strong>Success:</strong> <%= success %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        <% } %>
+
+        <form action="/admin/movies" method="POST" id="movieForm">
+          <div class="row g-4">
+            <!-- base info -->
+            <div class="col-12">
+              <h5 class="border-bottom pb-2 mb-3">
+                <i class="fas fa-info-circle me-2 text-success"></i>Basic Information
+              </h5>
+            </div>
+
+            <!-- movie title -->
+            <div class="col-md-6">
+              <label for="title" class="form-label">Title <span class="text-danger">*</span></label>
+              <input
+                type="text"
+                class="form-control"
+                id="title"
+                name="title"
+                value="<%= fd.title || '' %>"
+                required
+                maxlength="100"
+                placeholder="Enter movie title"
+              >
+              <div class="form-text">Up to 100 characters</div>
+            </div>
+
+            <!-- english title -->
+            <div class="col-md-6">
+              <label for="englishTitle" class="form-label">English Title</label>
+              <input
+                type="text"
+                class="form-control"
+                id="englishTitle"
+                name="englishTitle"
+                value="<%= fd.englishTitle || '' %>"
+                maxlength="100"
+                placeholder="Enter English title"
+              >
+            </div>
+
+            <!-- 导演 -->
+            <div class="col-md-6">
+              <label for="director" class="form-label">Director <span class="text-danger">*</span></label>
+              <input
+                type="text"
+                class="form-control"
+                id="director"
+                name="director"
+                value="<%= fd.director || '' %>"
+                required
+                placeholder="Enter director name"
+              >
+            </div>
+
+            <!-- rating -->
+            <div class="col-md-6">
+              <label for="rating" class="form-label">HK Rating <span class="text-danger">*</span></label>
+              <select class="form-select" id="rating" name="rating" required>
+                <option value="">Select rating</option>
+                <option value="I" <%= fd.rating === 'I' ? 'selected' : '' %>>I - All ages admitted</option>
+                <option value="IIA" <%= fd.rating === 'IIA' ? 'selected' : '' %>>IIA - Not Suitable for Children</option>
+                <option value="IIB" <%= fd.rating === 'IIB' ? 'selected' : '' %>>IIB - Not Suitable for Young Persons and Children</option>
+                <option value="III" <%= fd.rating === 'III' ? 'selected' : '' %>>III - Persons Aged 18 and Above Only</option>
+              </select>
+            </div>
+
+            <!-- release Date -->
+            <div class="col-md-4">
+              <label for="releaseDate" class="form-label">Release Date <span class="text-danger">*</span></label>
+              <input
+                type="date"
+                class="form-control"
+                id="releaseDate"
+                name="releaseDate"
+                value="<%= fd.releaseDate || '' %>"
+                required
+              >
+            </div>
+
+            <!-- duration -->
+            <div class="col-md-4">
+              <label for="duration" class="form-label">Duration (mins) <span class="text-danger">*</span></label>
+              <input
+                type="number"
+                class="form-control"
+                id="duration"
+                name="duration"
+                value="<%= fd.duration || '' %>"
+                required
+                min="1"
+                max="500"
+                placeholder="e.g., 120"
+              >
+            </div>
+
+            <!-- language -->
+            <div class="col-md-4">
+              <label for="language" class="form-label">Language</label>
+              <input
+                type="text"
+                class="form-control"
+                id="language"
+                name="language"
+                value="<%= fd.language || 'English' %>"
+                placeholder="English"
+              >
+            </div>
+
+            <!-- description -->
+            <div class="col-12">
+              <label for="description" class="form-label">Description <span class="text-danger">*</span></label>
+              <textarea
+                class="form-control"
+                id="description"
+                name="description"
+                rows="4"
+                maxlength="2000"
+                required
+                placeholder="Enter description..."><%= fd.description || '' %></textarea>
+              <div class="form-text">Up to 2000 characters</div>
+            </div>
+
+            <!-- Display Information -->
+            <div class="col-12 mt-4">
+              <h5 class="border-bottom pb-2 mb-3">
+                <i class="fas fa-film me-2 text-success"></i>Display Information
+              </h5>
+            </div>
+
+            <!-- poster Url -->
+            <div class="col-12">
+              <label for="posterUrl" class="form-label">Poster Image URL <span class="text-danger">*</span></label>
+              <input
+                type="url"
+                class="form-control"
+                id="posterUrl"
+                name="posterUrl"
+                value="<%= fd.posterUrl || '' %>"
+                required
+                placeholder="https://example.com/poster.jpg"
+              >
+              <div class="form-text">Please provide a full poster image URL</div>
+              <div id="posterPreview" class="mt-3" style="display: none;">
+                <p class="text-muted mb-2">Poster Preview:</p>
+                <img id="previewImage" src="" alt="Poster Preview" style="max-height: 200px;" class="img-thumbnail">
+              </div>
+            </div>
+
+            <!-- Categories info -->
+            <div class="col-12 mt-4">
+              <h5 class="border-bottom pb-2 mb-3">
+                <i class="fas fa-tags me-2 text-success"></i>Categories
+              </h5>
+            </div>
+
+            <!-- Movie Genres -->
+            <div class="col-12">
+              <label class="form-label">Genres <span class="text-danger">*</span></label>
+              <div class="row g-2">
+                <%
+                const commonGenres = [
+                  { label: 'Action', value: 'Action' },
+                  { label: 'Comedy', value: 'Comedy' },
+                  { label: 'Drama', value: 'Drama' },
+                  { label: 'Romance', value: 'Romance' },
+                  { label: 'Sci-Fi', value: 'Sci-Fi' },
+                  { label: 'Horror', value: 'Horror' },
+                  { label: 'Mystery', value: 'Mystery' },
+                  { label: 'Animation', value: 'Animation' },
+                  { label: 'Crime', value: 'Crime' },
+                  { label: 'Adventure', value: 'Adventure' },
+                  { label: 'Fantasy', value: 'Fantasy' },
+                  { label: 'Documentary', value: 'Documentary' }
+                ];
+                const selectedGenres = fd.genres ? (Array.isArray(fd.genres) ? fd.genres : [fd.genres]) : [];
+                %>
+                <% commonGenres.forEach(genre => { %>
+                  <div class="col-md-3 col-6">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="genres"
+                        value="<%= genre.value %>"
+                        id="genre-<%= genre.value %>"
+                        <%= selectedGenres.includes(genre.value) ? 'checked' : '' %>
+                      >
+                      <label class="form-check-label" for="genre-<%= genre.value %>">
+                        <%= genre.label %>
+                      </label>
+                    </div>
+                  </div>
+                <% }); %>
+                <div class="col-12 mt-2">
+                  <div class="input-group input-group-sm">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="customGenre"
+                      placeholder="Add custom genres (comma separated)"
+                    >
+                    <button type="button" class="btn btn-outline-secondary" onclick="addCustomGenres()">
+                      <i class="fas fa-plus me-1"></i>Add
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- cast -->
+            <div class="col-12">
+              <label for="cast" class="form-label">Cast</label>
+              <textarea
+                class="form-control"
+                id="cast"
+                name="cast"
+                rows="3"
+                placeholder="Jackie CHAN"
+              ><%= fd.cast || '' %></textarea>
+              <div class="form-text">Separate multiple actors with commas</div>
+            </div>
+
+            <!-- Theater Information -->
+            <div class="col-12 mt-4">
+              <h5 class="border-bottom pb-2 mb-3">
+                <i class="fas fa-map-marker-alt me-2 text-success"></i>Theater Information
+              </h5>
+            </div>
+
+            <!-- Theater Location -->
+            <div class="col-md-6">
+              <label for="theaterLocation" class="form-label">Theater Location</label>
+              <input
+                type="text"
+                class="form-control"
+                id="theaterLocation"
+                name="theaterLocation"
+                value="<%= fd.theaterLocation || 'HongKong' %>"
+                placeholder="HongKong"
+              >
+            </div>
+
+            <div class="col-md-6">
+              <label for="specialFormat" class="form-label">Special Format</label>
+              <select class="form-select" id="specialFormat" name="specialFormat">
+                <option value="2D" selected>2D</option>
+                <option value="3D">3D</option>
+                <option value="IMAX">IMAX</option>
+                <option value="4DX">4DX</option>
+                <option value="Dolby Atmos">Dolby Atmos</option>
+                <option value="无">无</option>
+              </select>
+            </div>
+
+            <!-- Theater Address  -->
+            <div class="col-12">
+              <label for="theaterAddress" class="form-label">Theater Address</label>
+              <input
+                type="text"
+                class="form-control"
+                id="theaterAddress"
+                name="theaterAddress"
+                value="<%= fd.theaterAddress || '' %>"
+                placeholder="100 Nathan Road, Tsim Sha Tsui, Kowloon, Hong Kong"
+              >
+            </div>
+
+            <!-- Show times -->
+            <div class="col-md-6">
+              <label for="showTimes" class="form-label">Showtimes</label>
+              <textarea
+                class="form-control"
+                id="showTimes"
+                name="showTimes"
+                rows="3"
+                placeholder="14:30, 17:00, 19:30, 22:00"
+              ><%= fd.showTimes || '' %></textarea>
+              <div class="form-text">Separate times with commas (24-hour format)
+            </div>
+
+            <!-- Subtitle Languages  -->
+            <div class="col-md-6">
+              <label for="subtitles" class="form-label">Subtitle Languages</label>
+              <textarea
+                class="form-control"
+                id="subtitles"
+                name="subtitles"
+                rows="3"
+                placeholder="Chinese, English"
+              ><%= fd.subtitles || 'Chinese' %></textarea>
+              <div class="form-text">Separate languages with commas</div>
+            </div>
+
+            <!-- Ticket Price  -->
+            <div class="col-md-6">
+              <label for="ticketPrice" class="form-label">Ticket Price (HKD)</label>
+              <div class="input-group">
+                <span class="input-group-text">HKD</span>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="ticketPrice"
+                  name="ticketPrice"
+                  value="<%= fd.ticketPrice || '80' %>"
+                  min="0"
+                  step="5"
+                  placeholder="80"
+                >
+              </div>
+            </div>
+
+            <!-- Status info -->
+            <div class="col-md-6">
+              <label class="form-label d-block">Status</label>
+              <div class="form-check form-switch">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="isFull"
+                  name="isFull"
+                  <%= fd.isFull ? 'checked' : '' %>
+                >
+                <label class="form-check-label" for="isFull">
+                  Mark as full
+                </label>
+              </div>
+              <div class="form-text">When enabled, movie shows as full
+            </div>
+          </div>
+
+          <!-- form buttons -->
+          <div class="mt-5 border-top pt-4">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <button type="submit" class="btn btn-success me-2">
+                  <i class="fas fa-save me-2"></i>Save Movie
+                </button>
+                <a href="/admin" class="btn btn-outline-secondary me-2">
+                  <i class="fas fa-times me-2"></i>Cancel
+                </a>
+              </div>
+              <div>
+                <button type="button" class="btn btn-outline-warning" onclick="resetForm()">
+                  <i class="fas fa-undo me-2"></i>Reset Form
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Add custom type functionality
+function addCustomGenres() {
+  const customText = document.getElementById('customGenre').value;
+  if (!customText.trim()) {
+    alert('Please enter a custom type.');
+    return;
+  }
+
+  const genres = customText.split(',').map(g => g.trim()).filter(g => g);
+  const container = document.querySelector('.row.g-2');
+
+  genres.forEach(genre => {
+    const existingCheckbox = document.querySelector(`input[value="${genre}"]`);
+    if (!existingCheckbox) {
+      const newCol = document.createElement('div');
+      newCol.className = 'col-md-3 col-6';
+      newCol.innerHTML = `
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="genres" value="${genre}" id="genre-custom-${genre}" checked>
+          <label class="form-check-label" for="genre-custom-${genre}">
+            ${genre}
+          </label>
+        </div>
+      `;
+      container.insertBefore(newCol, container.lastElementChild);
+    }
+  });
+
+  document.getElementById('customGenre').value = '';
+}
+
+// Reset Form
+function resetForm() {
+  if (confirm('Are you sure you want to reset the form? All entered information will be lost.')) {
+    document.getElementById('movieForm').reset();
+  }
+}
+
+// Form Validation
+document.getElementById('movieForm').addEventListener('submit', function(e) {
+  let isValid = true;
+  const requiredFields = this.querySelectorAll('[required]');
+
+  // Check required fields
+  requiredFields.forEach(field => {
+    if (!field.value.trim()) {
+      isValid = false;
+      field.classList.add('is-invalid');
+
+      // Add error message
+      if (!field.nextElementSibling || !field.nextElementSibling.classList.contains('invalid-feedback')) {
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'invalid-feedback';
+        errorDiv.textContent = 'This field is required.';
+        field.parentNode.appendChild(errorDiv);
+      }
+    } else {
+      field.classList.remove('is-invalid');
+    }
+  });
+
+  // Check that at least one type is selected.
+  const genreCheckboxes = this.querySelectorAll('input[name="genres"]:checked');
+  if (genreCheckboxes.length === 0) {
+    isValid = false;
+    const genreContainer = this.querySelector('.row.g-2');
+    if (!genreContainer.querySelector('.alert')) {
+      const alertDiv = document.createElement('div');
+      alertDiv.className = 'alert alert-warning mt-2';
+      alertDiv.innerHTML = '<i class="fas fa-exclamation-triangle me-2"></i>请至少选择一个电影类型！';
+      genreContainer.parentNode.insertBefore(alertDiv, genreContainer.nextSibling);
+    }
+  }
+
+  // Validate URL format
+  const posterUrl = document.getElementById('posterUrl');
+  if (posterUrl.value && !isValidUrl(posterUrl.value)) {
+    isValid = false;
+    posterUrl.classList.add('is-invalid');
+    alert('Please provide a valid poster URL (must start with http:// or https://).');
+  }
+
+  if (!isValid) {
+    e.preventDefault();
+    // Scroll to the first error field
+    const firstError = this.querySelector('.is-invalid');
+    if (firstError) {
+      firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      firstError.focus();
+    }
+  }
+});
+
+// URL validation function
+function isValidUrl(string) {
+  try {
+    new URL(string);
+    return string.startsWith('http://') || string.startsWith('https://');
+  } catch (_) {
+    return false;
+  }
+}
+
+// Real-time verification
+document.querySelectorAll('#movieForm [required]').forEach(field => {
+  field.addEventListener('input', function() {
+    if (this.value.trim()) {
+      this.classList.remove('is-invalid');
+    }
+  });
+});
+
+// Poster URL Preview
+document.getElementById('posterUrl').addEventListener('input', function() {
+  const previewContainer = document.getElementById('posterPreview');
+  const previewImage = document.getElementById('previewImage');
+
+  if (this.value && isValidUrl(this.value)) {
+    previewContainer.style.display = 'block';
+    previewImage.src = this.value;
+    previewImage.onerror = function() {
+      previewContainer.style.display = 'none';
+      alert('Unable to load poster image. Please check if the URL is correct.');
+    };
+  } else {
+    previewContainer.style.display = 'none';
+  }
+});
+
+// Check movie genre selection
+document.querySelectorAll('input[name="genres"]').forEach(checkbox => {
+  checkbox.addEventListener('change', function() {
+    const genreAlert = document.querySelector('.row.g-2').parentNode.querySelector('.alert');
+    if (genreAlert) {
+      genreAlert.remove();
+    }
+  });
+});
+</script>

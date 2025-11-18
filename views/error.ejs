@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= message %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <h1>Hong Kong Movie System</h1>
+            <% if (user) { %>
+                <a href="/admin/logout">Logout</a>
+            <% } else { %>
+                <a href="/admin/login">Admin Login</a>
+            <% } %>
+        </nav>
+    </header>
+
+    <main>
+        <div class="error-container" style="max-width: 800px; margin: 2rem auto; padding: 2rem; text-align: center;">
+            <h1 style="color: #e74c3c; margin-bottom: 1rem;"><%= message %></h1>
+
+            <% if (error && error.status) { %>
+                <h2 style="color: #95a5a6; margin-bottom: 1rem;">Error Code: <%= error.status %></h2>
+            <% } %>
+
+            <% if (error && error.stack) { %>
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 5px; text-align: left; margin-top: 1rem;">
+                    <pre style="white-space: pre-wrap; font-size: 0.9rem; color: #7f8c8d;"><%= error.stack %></pre>
+                </div>
+            <% } %>
+
+            <div style="margin-top: 2rem;">
+                <a href="/" style="display: inline-block; background: #3498db; color: white; padding: 0.75rem 1.5rem; text-decoration: none; border-radius: 5px; margin-right: 1rem;">
+                    Back to Home
+                </a>
+                <a href="javascript:history.back()" style="display: inline-block; background: #95a5a6; color: white; padding: 0.75rem 1.5rem; text-decoration: none; border-radius: 5px;">
+                    Go Back
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy;  Movie System</p>
+    </footer>
+</body>
+</html>
