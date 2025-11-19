@@ -36,23 +36,22 @@ server.set('views', path.join(__dirname, 'views'));
 
 // Session Configuration - Enhanced Security
 server.use(session({
-    name: 'movieSystem.sid', // Cookie 名称
+    name: 'movieSystem.sid', // Cookie name
     secret: process.env.SESSION_SECRET || 'hongkong-movie-system-2025-secure-key',
     resave: false,
     saveUninitialized: false,
     cookie: {
         secure: process.env.NODE_ENV === 'production',
-        httpOnly: true, // 防止XSS攻击
-        maxAge: 24 * 60 * 60 * 1000, // 24小时
-        sameSite: 'strict' // CSRF保护
+        httpOnly: true, // defend XSS attack
+        maxAge: 24 * 60 * 60 * 1000, // 24 hours
+        sameSite: 'strict' // CSRF protect
     },
     // Using external session storage in a production environment
-    // store: You can configure Redis or MongoDB to store sessions.
 }));
 
 // Custom Middleware
 server.use(getCurrentManager);
-server.use(requestLogger); // 请求日志
+server.use(requestLogger); // request log
 
 // Global variable injection
 server.use((req, res, next) => {
