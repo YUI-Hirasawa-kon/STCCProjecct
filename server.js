@@ -34,6 +34,9 @@ server.use(methodOverride('_method'));
 server.set('view engine', 'ejs');
 server.set('views', path.join(__dirname, 'views'));
 
+// Trust proxy for secure cookies behind HTTPS proxies (e.g., Render)
+server.set('trust proxy', 1);
+
 // Session Configuration - Enhanced Security
 server.use(session({
     name: 'movieSystem.sid', // Cookie name
@@ -44,8 +47,9 @@ server.use(session({
         secure: process.env.NODE_ENV === 'production',
         httpOnly: true, // defend XSS attack
         maxAge: 24 * 60 * 60 * 1000, // 24 hours
-        sameSite: 'strict' // CSRF protect
+        sameSite: 'lax' // better compatibility for redirects
     },
+    proxy: true
     // Using external session storage in a production environment
 }));
 
