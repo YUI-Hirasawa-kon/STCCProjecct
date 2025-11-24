@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9f01148-de07-4525-848e-cc4508ee5620" name="更改" comment="The multipart encoding of the edit page form has been removed, allowing expres. urlencoded to be parsed correctly." />
+    <list default="true" id="b9f01148-de07-4525-848e-cc4508ee5620" name="更改" comment="The multipart encoding of the edit page form has been removed, allowing expres. urlencoded to be parsed correctly.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/admin/create-movie.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin/create-movie.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/admin/dashboard.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin/dashboard.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/admin/edit-movie.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/admin/edit-movie.ejs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -66,6 +71,7 @@
     &quot;Node.js.bin\\www.executor&quot;: &quot;Run&quot;,
     &quot;Node.js.generateMovieSamples.js.executor&quot;: &quot;Run&quot;,
     &quot;Node.js.index.js.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.server.js.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
@@ -83,7 +89,7 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.language.and.region&quot;,
     &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
     &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2025.2.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
@@ -107,8 +113,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Node.js.generateMovieSamples.js" />
         <item itemvalue="Node.js.server.js" />
+        <item itemvalue="Node.js.generateMovieSamples.js" />
         <item itemvalue="Node.js.Manager.js" />
         <item itemvalue="Node.js.index.js" />
         <item itemvalue="Node.js.Movie.js" />
@@ -148,7 +154,12 @@
       <workItem from="1763481287200" duration="28000" />
       <workItem from="1763536846224" duration="5110000" />
       <workItem from="1763743375005" duration="2086000" />
-      <workItem from="1763818986933" duration="454000" />
+      <workItem from="1763818986933" duration="904000" />
+      <workItem from="1763914215983" duration="371000" />
+      <workItem from="1763914602966" duration="117000" />
+      <workItem from="1763914775812" duration="4262000" />
+      <workItem from="1763952976477" duration="131000" />
+      <workItem from="1763953121263" duration="635000" />
     </task>
     <task id="LOCAL-00001" summary="na">
       <option name="closed" value="true" />
@@ -190,7 +201,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763819035336</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="The multipart encoding of the edit page form has been removed, allowing expres. urlencoded to be parsed correctly.">
+      <option name="closed" value="true" />
+      <created>1763819723456</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1763819723456</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
