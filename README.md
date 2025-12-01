@@ -72,18 +72,15 @@ curl "https://stccprojecct.onrender.com/api/movies"
 curl "https://stccprojecct.onrender.com/api/movies/<movie_id>"
 
 - Create:
-
-(Linux):curl -X POST "https://stccprojecct.onrender.com/api/movies" -H "Content-Type: application/json" -d '{"title": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", "description": "Classic action film", "posterUrl": "https://www.afcd.gov.hk/tc_chi/conservation/con_fau/con_fau_local/images/ferretbadger.jpg", "rating": "IIB", "releaseDate": "2025-11-14", "director": "Jackie Chan", "genres": ["Action", "Crime"], "duration": 100, "language": "Cantonese", "theaterLocation": "HongKong", "cast": ["Jackie Chan", "Brigitte Lin"], "showTimes": ["14:30", "19:30"]}'
-
-(window):curl -X POST "https://stccprojecct.onrender.com/api/movies" -H "Content-Type: application/json" -d "{"title": ""xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "description": "Classic action film", "posterUrl": "https://www.afcd.gov.hk/tc_chi/conservation/con_fau/con_fau_local/images/ferretbadger.jpg/", "rating": "IIB", "releaseDate": "2025-11-14", "director": "Jackie Chan", "genres": ["Action", "Crime"], "duration": 100, "language": "Cantonese", "theaterLocation": "HongKong", "cast": ["Jackie Chan", "Brigitte Lin"], "showTimes": [""4:30", "19:30"]}"
+  - (Linux):curl -X POST "https://stccprojecct.onrender.com/api/movies" -H "Content-Type: application/json" -d '{"title": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", "description": "Classic action film", "posterUrl": "https://www.afcd.gov.hk/tc_chi/conservation/con_fau/con_fau_local/images/ferretbadger.jpg", "rating": "IIB", "releaseDate": "2025-11-14", "director": "Jackie Chan", "genres": ["Action", "Crime"], "duration": 100, "language": "Cantonese", "theaterLocation": "HongKong", "cast": ["Jackie Chan", "Brigitte Lin"], "showTimes": ["14:30", "19:30"]}'
+  - (window):curl -X POST "https://stccprojecct.onrender.com/api/movies" -H "Content-Type: application/json" -d "{"title": ""xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "description": "Classic action film", "posterUrl": "https://www.afcd.gov.hk/tc_chi/conservation/con_fau/con_fau_local/images/ferretbadger.jpg/", "rating": "IIB", "releaseDate": "2025-11-14", "director": "Jackie Chan", "genres": ["Action", "Crime"], "duration": 100, "language": "Cantonese", "theaterLocation": "HongKong", "cast": ["Jackie Chan", "Brigitte Lin"], "showTimes": [""4:30", "19:30"]}"
 
 - Update:
+  - (Linux):curl -X PUT "https://stccprojecct.onrender.com/api/movies/69241ad55f9d94971d5ad11d" \
+     -H "Content-Type: application/json" \
+     -d '{ "duration": 95, "isFull": true }'
 
-(Linux):curl -X PUT "https://stccprojecct.onrender.com/api/movies/69241ad55f9d94971d5ad11d" \
-  -H "Content-Type: application/json" \
-  -d '{ "duration": 95, "isFull": true }'
-
-(window):curl -X PUT "https://stccprojecct.onrender.com/api/movies/<movie_id>" -H "Content-Type: application/json" -d "{"duration": 95, "isFull": true}"
+  - (window):curl -X PUT "https://stccprojecct.onrender.com/api/movies/<movie_id>" -H "Content-Type: application/json" -d "{"duration": 95, "isFull": true}"
 
 - Delete:
 curl -X DELETE "https://stccprojecct.onrender.com/api/movies/69241ad55f9d94971d5ad11d"
