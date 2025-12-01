@@ -32,7 +32,7 @@ router.post('/login', requireGuest, async (req, res) => {
         });
 
         if (!manager) {
-            console.log('❌ Login failed: user not found', { username });
+            console.log(' Login failed: user not found', { username });
             return res.render('auth/login', {
                 title: 'Admin Login - Hong Kong Movie System',
                 user: null,
@@ -44,7 +44,7 @@ router.post('/login', requireGuest, async (req, res) => {
         const isPasswordValid = await manager.comparePassword(password);
 
         if (!isPasswordValid) {
-            console.log('❌ Login failed: invalid password', { username });
+            console.log(' Login failed: invalid password', { username });
             return res.render('auth/login', {
                 title: 'Admin Login - Movie System',
                 user: null,
@@ -64,14 +64,14 @@ router.post('/login', requireGuest, async (req, res) => {
             lastLogin: manager.lastLogin
         };
 
-        console.log('✅ Login success:', { username, role: manager.role });
+        console.log(' Login success:', { username, role: manager.role });
 
         req.session.success = `Welcome back, ${manager.displayName || manager.username}!`;
 
         res.redirect('/admin');
 
     } catch (error) {
-        console.error('❌ Login error:', error);
+        console.error(' Login error:', error);
         res.render('auth/login', {
             title: 'Admin Login - Hong Kong Movie System',
             user: null,
@@ -83,14 +83,14 @@ router.post('/login', requireGuest, async (req, res) => {
 router.get('/logout', (req, res) => {
     const username = req.session.manager ? req.session.manager.username : 'Unknown user';
 
-    // 销毁会话
+    // distracted session
     req.session.destroy((err) => {
         if (err) {
-            console.error('❌ Logout error:', err);
+            console.error(' Logout error:', err);
             return res.redirect('/admin');
         }
 
-        console.log('✅ User logged out:', { username });
+        console.log(' User logged out:', { username });
         res.redirect('/');
     });
 });

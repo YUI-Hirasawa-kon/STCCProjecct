@@ -122,7 +122,7 @@ router.put('/movies/:id', async (req, res) => {
             showTimes: Array.isArray(req.body.showTimes) ? req.body.showTimes : []
         };
 
-        // 如果提供了releaseDate，转换为Date对象
+        // If releaseDate is provided, convert it to a Date object.
         if (req.body.releaseDate) {
             updateData.releaseDate = new Date(req.body.releaseDate);
         }

@@ -50,7 +50,7 @@ const requireSuperAdmin = (req, res, next) => {
     return res.redirect('/admin');
 };
 
-// Log requests (optional)
+// Log requests
 const requestLogger = (req, res, next) => {
     console.log(`${new Date().toISOString()} - ${req.method} ${req.originalUrl} - ${req.session.manager ? req.session.manager.username : 'Not logged in'}`);
     next();

@@ -6,7 +6,7 @@ const Movie = require('../models/Movie');
 router.get('/', async (req, res) => {
     try {
         const movies = await Movie.find({
-            releaseDate: { $lte: new Date() } // 只显示已上映的电影
+            releaseDate: { $lte: new Date() } // only display showing
         }).sort({ releaseDate: -1 });
 
         res.render('index', {
@@ -78,7 +78,7 @@ router.get('/movies/rating/:rating', async (req, res) => {
 router.get('/movies', async (req, res) => {
     try {
         const movies = await Movie.find({
-            releaseDate: { $lte: new Date() } // 只显示已上映的电影
+            releaseDate: { $lte: new Date() } // only display showing
         }).sort({ releaseDate: -1 });
 
         res.render('movies/filtered', {

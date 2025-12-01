@@ -23,11 +23,11 @@ class Database {
                 connectionOptions
             );
 
-            console.log(`✅ Movie system database connection successful`);
-            console.log(`   📍 host: ${conn.connection.host}`);
-            console.log(`   📊 database: ${conn.connection.name}`);
-            console.log(`   🔗 port: ${conn.connection.port}`);
-            console.log(`   🚀 status: ${this._getConnectionState(conn.connection.readyState)}`);
+            console.log(` Movie system database connection successful`);
+            console.log(` host: ${conn.connection.host}`);
+            console.log(` database: ${conn.connection.name}`);
+            console.log(` port: ${conn.connection.port}`);
+            console.log(` status: ${this._getConnectionState(conn.connection.readyState)}`);
 
             // initialize Database
             await initializeDatabase();
@@ -35,7 +35,7 @@ class Database {
             this._setupEventListeners();
 
         } catch (error) {
-            console.error('❌ Database connection failed:');
+            console.error('   Database connection failed:');
             console.error(`   error message: ${error.message}`);
             console.error('   Check, please:');
             console.error('   1. Is the database connection string correct?');
@@ -48,20 +48,20 @@ class Database {
 
     _setupEventListeners() {
         mongoose.connection.on('connected', () => {
-            console.log('🟢 Mongoose Connected to the database');
+            console.log(' Mongoose Connected to the database');
         });
 
         mongoose.connection.on('error', (err) => {
-            console.error('🔴 Mongoose Connection error:', err.message);
+            console.error(' Mongoose Connection error:', err.message);
         });
 
         mongoose.connection.on('disconnected', () => {
-            console.log('🟡 Mongoose Connection disconnected');
+            console.log(' Mongoose Connection disconnected');
         });
 
         process.on('SIGINT', async () => {
             await mongoose.connection.close();
-            console.log('⏹️  Mongoose Connection closed (Application terminated)');
+            console.log(' Mongoose Connection closed (Application terminated)');
             process.exit(0);
         });
     }
@@ -102,14 +102,14 @@ class Database {
     async closeConnection() {
         try {
             await mongoose.connection.close();
-            console.log('🔌 Database connection closed');
+            console.log(' Database connection closed');
         } catch (error) {
             console.error('An error occurred while closing the database connection.:', error);
         }
     }
 }
 
-// 创建单例实例
+
 const database = new Database();
 
 module.exports = database;

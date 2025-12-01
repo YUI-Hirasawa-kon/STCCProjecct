@@ -2,6 +2,8 @@ const express = require('express');
 const session = require('express-session');
 const methodOverride = require('method-override');
 const path = require('path');
+const http = require('http');
+const debug = require('debug')('movie-system:server');
 require('dotenv').config();
 
 // Import database connection
@@ -20,7 +22,6 @@ const authRouter = require('./routes/auth');
 // Add authentication route
 
 const server = express();
-const PORT = process.env.PORT || 3000;
 
 // Middleware settings
 server.use(express.json());
@@ -40,7 +41,7 @@ server.set('trust proxy', 1);
 // Session Configuration - Enhanced Security
 server.use(session({
     name: 'movieSystem.sid', // Cookie name
-    secret: process.env.SESSION_SECRET || 'hongkong-movie-system-2025-secure-key',
+    secret: process.env.SESSION_SECRET || '713d7a4350d97610919fddcdcfabb7dbe0268be0a226285bff98b6b792cfb54640865bb9314188aab53edfa9becd2126',
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -123,5 +124,55 @@ server.use((err, req, res, next) => {
         } : {}
     });
 });
+
+// Normalize a port into a number, string, or false.
+function normalizePort(val) {
+    const port = parseInt(val, 10);
+
+    if (isNaN(port)) {
+        return val; // named pipe
+    }
+    if (port >= 0) {
+        return port; // port number
+    }
+    return false;
+}
+
+// Start HTTP server when running this file directly
+if (require.main === module) {
+    const port = normalizePort(process.env.PORT || '3000');
+    server.set('port', port);
+
+    const httpServer = http.createServer(server);
+    httpServer.listen(port);
+
+    httpServer.on('error', (error) => {
+        if (error.syscall !== 'listen') throw error;
+
+        const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
+        switch (error.code) {
+            case 'EACCES':
+                console.error(bind + ' requires elevated privileges');
+                process.exit(1);
+                break;
+            case 'EADDRINUSE':
+                console.error(bind + ' is already in use');
+                process.exit(1);
+                break;
+            default:
+                throw error;
+        }
+    });
+
+    httpServer.on('listening', () => {
+        const addr = httpServer.address();
+        const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
+        console.log('System Launched Successfully');
+        console.log(`Access address: http://localhost:${addr.port}`);
+        console.log(`running port: ${addr.port}`);
+        console.log(`environment: ${process.env.NODE_ENV || 'development'}`);
+        debug('Listening on ' + bind);
+    });
+}
 
 module.exports = server;

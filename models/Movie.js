@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 
 // Hong Kong film rating system
 const HONG_KONG_RATINGS = {
-    'I': 'I级 - Suitable for all ages',
-    'IIA': 'IIA级 - Not suitable for children',
-    'IIB': 'IIB级 - Not suitable for teenagers and children',
-    'III': 'III级 - Viewing is only permitted for those aged 18 or older.'
+    'I': 'I - Suitable for all ages',
+    'IIA': 'IIA - Not suitable for children',
+    'IIB': 'IIB - Not suitable for teenagers and children',
+    'III': 'III - Viewing is only permitted for those aged 18 or older.'
 };
 
 const movieSchema = new mongoose.Schema({

@@ -77,7 +77,7 @@ managerSchema.methods.comparePassword = async function(candidatePassword) {
     console.log('🔐 Password comparison result:', isMatch);
     return isMatch;
   } catch (error) {
-    console.error('❌ Password comparison error:', error);
+    console.error(' Password comparison error:', error);
     return false;
   }
 };
