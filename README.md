@@ -62,7 +62,7 @@
 
 ### CURL Test Example
 
-- "poster url demo:
+- poster url demo:
 https://scholars.hkmu.edu.hk/files-asset/19040519/5619180f6b22b3be379691a86a293cdf.jpg/
 
 - Read:
