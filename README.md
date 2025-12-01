@@ -92,5 +92,5 @@ curl -X DELETE "https://stccprojecct.onrender.com/api/movies/69241ad55f9d94971d5
 - Start locally:`npm start` or `node server.js`
 - Environment variables:
   - `MONGODB_ATLAS_URI`：MongoDB connection string
-  - `SESSION_SECRET`：Strong random key, used for session signing名
+  - `SESSION_SECRET`：Strong random key, used for session signing
 
