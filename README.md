@@ -12,7 +12,7 @@
   - Built-in HTTP server startup logic (supports direct startup via `node server.js`), including port normalization, error handling, and monitoring logs.
 - `package.json`
   - dependency:`express`、`ejs`、`mongoose`、`express-session`、`method-override`、`dotenv`、`bcrypt`.
-  - script:`start`（`node server.js`）、`dev`（`nodemon ./bin/www`）、`debug`（`DEBUG=movie-system:* nodemon ./bin/www`）
+  - script:`start`（`node server.js`）、`dev`（`nodemon server.js`）、`debug`（`DEBUG=movie-system:* nodemon server.js`）
 - `public/`
   - `stylesheets/style.css`:Global Styles
 - `views/`
