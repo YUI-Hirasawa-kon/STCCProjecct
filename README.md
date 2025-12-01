@@ -2,7 +2,7 @@
 
 ## Project Information
 - Project Name:Movie System
-- Group Information：Group 55;member:<Chung Ho Long (s1420415)>, <Kwok Yu Chun (s1411691)>,<Wong Kai Yuen (s1415545)>,<Chan Lee Po (s1421223)>
+- Group Information：Group 55;member:Chung Ho Long (s1420415), Kwok Yu Chun (s1411691),Wong Kai Yuen (s1415545),Chan Lee Po (s1421223)
 - Cloud url:'https://stccprojecct.onrender.com/'
 
 ## Project Files
