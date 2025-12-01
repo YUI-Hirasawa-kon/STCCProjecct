@@ -62,21 +62,22 @@
 
 ### CURL Test Example
 
-"poster url demo:
+- "poster url demo:
 https://cdn.britannica.com/94/494-050-A674AD3A/Fallow-deer-dama-dama.jpg?w=300
 https://scholars.hkmu.edu.hk/files-asset/19040519/5619180f6b22b3be379691a86a293cdf.jpg/
-Read:
+
+- Read:
 curl "https://stccprojecct.onrender.com/api/movies"
-Details:
+- Details:
 curl "https://stccprojecct.onrender.com/api/movies/<movie_id>"
 
-Create:
+- Create:
 
 (Linux):curl -X POST "https://stccprojecct.onrender.com/api/movies" -H "Content-Type: application/json" -d '{"title": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", "description": "Classic action film", "posterUrl": "https://www.afcd.gov.hk/tc_chi/conservation/con_fau/con_fau_local/images/ferretbadger.jpg", "rating": "IIB", "releaseDate": "2025-11-14", "director": "Jackie Chan", "genres": ["Action", "Crime"], "duration": 100, "language": "Cantonese", "theaterLocation": "HongKong", "cast": ["Jackie Chan", "Brigitte Lin"], "showTimes": ["14:30", "19:30"]}'
 
 (window):curl -X POST "https://stccprojecct.onrender.com/api/movies" -H "Content-Type: application/json" -d "{"title": ""xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "description": "Classic action film", "posterUrl": "https://www.afcd.gov.hk/tc_chi/conservation/con_fau/con_fau_local/images/ferretbadger.jpg/", "rating": "IIB", "releaseDate": "2025-11-14", "director": "Jackie Chan", "genres": ["Action", "Crime"], "duration": 100, "language": "Cantonese", "theaterLocation": "HongKong", "cast": ["Jackie Chan", "Brigitte Lin"], "showTimes": [""4:30", "19:30"]}"
 
-Update:
+- Update:
 
 (Linux):curl -X PUT "https://stccprojecct.onrender.com/api/movies/69241ad55f9d94971d5ad11d" \
   -H "Content-Type: application/json" \
@@ -84,7 +85,7 @@ Update:
 
 (window):curl -X PUT "https://stccprojecct.onrender.com/api/movies/<movie_id>" -H "Content-Type: application/json" -d "{"duration": 95, "isFull": true}"
 
-Delete:
+- Delete:
 curl -X DELETE "https://stccprojecct.onrender.com/api/movies/69241ad55f9d94971d5ad11d"
 
 ## Setup & Run
