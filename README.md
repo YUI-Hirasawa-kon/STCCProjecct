@@ -12,9 +12,9 @@
   - Built-in HTTP server startup logic (supports direct startup via `node server.js`), including port normalization, error handling, and monitoring logs.
 - `package.json`
   - dependency:`express`、`ejs`、`mongoose`、`express-session`、`method-override`、`dotenv`、`bcrypt`.
-  - script:`start`（`node server.js`）、`dev`（`nodemon ./bin/www`）、`debug`（`DEBUG=movie-system:* nodemon ./bin/www`）。
+  - script:`start`（`node server.js`）、`dev`（`nodemon ./bin/www`）、`debug`（`DEBUG=movie-system:* nodemon ./bin/www`）
 - `public/`
-  - `stylesheets/style.css`:Global Styles。
+  - `stylesheets/style.css`:Global Styles
 - `views/`
   - `index.ejs`、`error.ejs`、`layout.ejs`
   - `movies/`:`detail.ejs`、`filtered.ejs`
@@ -40,7 +40,7 @@
 - Default account (automatically created on first launch):
   - username:`test`
   - password:`test123`
-- The production environment needs to be set in the cloud environment variables:`MONGODB_ATLAS_URI`。
+- The production environment needs to be set in the cloud environment variables:`MONGODB_ATLAS_URI`
 
 ### Backend webpage (CRUD)
 - Entrance:`/admin`
